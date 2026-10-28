@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Play, CheckCircle2 } from "lucide-react";
@@ -12,11 +12,16 @@ interface EpisodeItemProps {
   isActive?: boolean;
 }
 
+const FALLBACK_THUMB =
+  "https://images.unsplash.com/photo-1578632767115-351597cf2477?w=600&auto=format&fit=crop&q=80";
+
 export default function EpisodeItem({
   animeSlug,
   episode,
   isActive = false,
 }: EpisodeItemProps) {
+  const [thumb, setThumb] = useState(episode.thumbnail || FALLBACK_THUMB);
+
   return (
     <Link
       href={`/anime/${animeSlug}/watch?ep=${episode.number}`}
@@ -29,9 +34,11 @@ export default function EpisodeItem({
       {/* 16:9 Thumbnail with Play Icon */}
       <div className="relative aspect-video w-24 sm:w-28 shrink-0 rounded-sm overflow-hidden bg-midnight border border-outline/60">
         <Image
-          src={episode.thumbnail}
+          src={thumb}
           alt={episode.title}
           fill
+          unoptimized
+          onError={() => setThumb(FALLBACK_THUMB)}
           sizes="120px"
           className="object-cover transition-transform group-hover:scale-105"
         />
@@ -41,7 +48,7 @@ export default function EpisodeItem({
           </div>
         </div>
         <div className="absolute bottom-1 right-1 px-1 py-0.2 rounded bg-midnight/90 text-[10px] text-soft-gray font-inter">
-          {episode.duration}
+          {episode.duration || "24m"}
         </div>
       </div>
 

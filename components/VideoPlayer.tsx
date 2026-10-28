@@ -50,21 +50,37 @@ export default function VideoPlayer({
   const videoRef = useRef<HTMLVideoElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  const [activeUrl, setActiveUrl] = useState(defaultUrl);
-  const [isIframe, setIsIframe] = useState(false);
+  const defaultServerUrl = `https://www.animeembed.com/embed/ani/${animeId || "151807"}/${episodeNumber}?track=sub&lang=id&autoPlay=0`;
+  const [activeUrl, setActiveUrl] = useState(defaultServerUrl);
+  const [isIframe, setIsIframe] = useState(true);
   const [servers, setServers] = useState<ServerOption[]>([
     {
-      server: "Aniyoi Stream (Sub Indo)",
-      url: `https://vidsrc.to/embed/anime/${animeId || "52299"}/${episodeNumber}`,
+      server: "Server ⚡ Fast Sub-Indo (Tanpa Iklan)",
+      url: defaultServerUrl,
       type: "iframe",
     },
     {
-      server: "MultiStream HD",
-      url: `https://multiembed.mov/?video_id=${animeId || "52299"}&tmdb=0&s=1&e=${episodeNumber}`,
+      server: "Server 🚀 Sub Indo HD (Clean Stream)",
+      url: `https://vidsrc.cc/v2/embed/anime/${animeId || "151807"}/${episodeNumber}`,
       type: "iframe",
     },
     {
-      server: "Backup Direct (MP4)",
+      server: "Server 3 (Anime HD Sub)",
+      url: `https://www.animeembed.com/embed/ani/${animeId || "151807"}/${episodeNumber}?track=sub&autoPlay=0`,
+      type: "iframe",
+    },
+    {
+      server: "Server 4 (MultiStream HD)",
+      url: `https://multiembed.mov/?video_id=${animeId || "151807"}&tmdb=0&s=1&e=${episodeNumber}`,
+      type: "iframe",
+    },
+    {
+      server: "Server 5 (2Embed Player)",
+      url: `https://2embed.cc/embed/anime/${animeId || "151807"}/${episodeNumber}`,
+      type: "iframe",
+    },
+    {
+      server: "Server 6 (Native Player MP4)",
       url: defaultUrl,
       type: "video",
     },
@@ -88,6 +104,11 @@ export default function VideoPlayer({
 
   // Fetch stream from stream resolver on mount or episode change
   useEffect(() => {
+    const immediateUrl = `https://www.animeembed.com/embed/ani/${animeId || "151807"}/${episodeNumber}?track=sub&autoPlay=0`;
+    setActiveUrl(immediateUrl);
+    setIsIframe(true);
+    setSelectedServerIndex(0);
+
     async function loadStream() {
       setLoadingStream(true);
       try {
@@ -211,19 +232,31 @@ export default function VideoPlayer({
         </div>
 
         <div className="flex flex-wrap items-center gap-2">
-          {servers.map((srv, idx) => (
-            <button
-              key={idx}
-              onClick={() => switchServer(idx)}
-              className={`px-3 py-1.5 rounded-md font-medium text-xs transition-all ${
-                selectedServerIndex === idx
-                  ? "bg-gradient-brand text-white shadow-glow-purple font-semibold"
-                  : "bg-slate-night/80 border border-outline text-soft-gray hover:text-white hover:border-electric-purple"
-              }`}
-            >
-              {srv.server}
-            </button>
-          ))}
+          {servers.map((srv, idx) => {
+            const isNoAds =
+              srv.server.toLowerCase().includes("iklan") ||
+              srv.server.toLowerCase().includes("no ads");
+            return (
+              <button
+                key={idx}
+                onClick={() => switchServer(idx)}
+                className={`px-3 py-1.5 rounded-md font-medium text-xs transition-all flex items-center gap-1.5 ${
+                  selectedServerIndex === idx
+                    ? "bg-gradient-brand text-white shadow-glow-purple font-semibold"
+                    : isNoAds
+                    ? "bg-electric-purple/20 border border-electric-purple/60 text-electric-purple hover:bg-electric-purple/30 hover:text-white"
+                    : "bg-slate-night/80 border border-outline text-soft-gray hover:text-white hover:border-electric-purple"
+                }`}
+              >
+                {srv.server}
+                {isNoAds && selectedServerIndex !== idx && (
+                  <span className="px-1.5 py-0.5 text-[9px] bg-electric-purple text-white rounded font-bold uppercase tracking-wider">
+                    NO ADS
+                  </span>
+                )}
+              </button>
+            );
+          })}
         </div>
       </div>
 
@@ -252,6 +285,7 @@ export default function VideoPlayer({
               title={`${title} Episode ${episodeNumber}`}
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
               allowFullScreen
+              referrerPolicy="no-referrer"
               className="w-full h-full border-0"
             />
           </div>

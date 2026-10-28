@@ -25,8 +25,7 @@ export default function AnimeCard({ anime, priority = false }: AnimeCardProps) {
       {/* Poster Image Container */}
       <div className="relative aspect-[2/3] w-full rounded-md overflow-hidden bg-deep-navy border border-outline/50 shadow-card transition-all duration-300 group-hover:shadow-glow-purple group-hover:border-electric-purple/60">
         <Image
-          src={imgSrc}3
-          
+          src={imgSrc}
           alt={anime.title}
           fill
           unoptimized

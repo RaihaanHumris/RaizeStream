@@ -8,6 +8,11 @@ export const metadata: Metadata = {
   title: "Raize Stream — Watch Anime. Rise Higher.",
   description:
     "Dark, cinematic, and energetic premium anime streaming platform.",
+  openGraph: {
+    title: "Raize Stream — Watch Anime. Rise Higher.",
+    description:
+      "Dark, cinematic, and energetic premium anime streaming platform.",
+  },
 };
 
 export default function RootLayout({
@@ -16,20 +21,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark">
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link
-          rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossOrigin="anonymous"
-        />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&family=Poppins:wght@500;600;700&display=swap"
-          rel="stylesheet"
-        />
-      </head>
-      <body className="bg-midnight text-white antialiased flex flex-col min-h-screen font-inter">
+    <html lang="en" className="dark" suppressHydrationWarning>
+      <body
+        className="bg-midnight text-white antialiased flex flex-col min-h-screen font-inter"
+        suppressHydrationWarning
+      >
         <Navbar />
         <main className="flex-1 pb-16 md:pb-0">{children}</main>
         <Footer />

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Suspense } from "react";
 import Link from "next/link";
 import { useParams, useSearchParams, useRouter } from "next/navigation";
 import { ChevronLeft, Info, Bookmark, Share2 } from "lucide-react";
@@ -8,9 +8,10 @@ import { Anime, Episode } from "@/types/anime";
 import { getAnimeBySlug } from "@/lib/api";
 import VideoPlayer from "@/components/VideoPlayer";
 import EpisodeItem from "@/components/EpisodeItem";
+import ArcEpisodeSelector from "@/components/ArcEpisodeSelector";
 import CommentSection from "@/components/CommentSection";
 
-export default function WatchPage() {
+function WatchContent() {
   const params = useParams();
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -150,43 +151,36 @@ export default function WatchPage() {
           <div className="p-4 rounded-md bg-deep-navy border border-outline space-y-4">
             <div className="flex items-center justify-between border-b border-outline pb-3">
               <h3 className="font-poppins font-semibold text-white text-base">
-                Episode List
+                Daftar Arc & Episode
               </h3>
               <span className="text-xs text-electric-purple font-medium">
                 {episodes.length || anime.episodesCount} Total
               </span>
             </div>
 
-            {/* Scrollable list with max height */}
-            <div className="space-y-2.5 max-h-[600px] overflow-y-auto pr-1">
-              {episodes.length > 0 ? (
-                episodes.map((ep) => (
-                  <EpisodeItem
-                    key={ep.id}
-                    animeSlug={anime.slug}
-                    episode={ep}
-                    isActive={ep.number === currentEpNum}
-                  />
-                ))
-              ) : (
-                Array.from({ length: 12 }, (_, i) => i + 1).map((n) => (
-                  <button
-                    key={n}
-                    onClick={() => goToEpisode(n)}
-                    className={`w-full text-left p-3 rounded-md border text-xs font-poppins transition-all ${
-                      n === currentEpNum
-                        ? "bg-slate-night border-l-4 border-l-electric-purple text-white shadow-glow-purple"
-                        : "bg-midnight/60 border-outline text-soft-gray hover:bg-slate-night/80"
-                    }`}
-                  >
-                    Episode {n}
-                  </button>
-                ))
-              )}
-            </div>
+            <ArcEpisodeSelector
+              anime={anime}
+              currentEpisodeNum={currentEpNum}
+              compact={true}
+              onSelectEpisode={(num) => goToEpisode(num)}
+            />
           </div>
         </div>
       </div>
     </div>
+  );
+}
+
+export default function WatchPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="w-full min-h-[70vh] flex items-center justify-center">
+          <div className="w-12 h-12 rounded-full border-4 border-electric-purple/30 border-t-electric-purple animate-spin" />
+        </div>
+      }
+    >
+      <WatchContent />
+    </Suspense>
   );
 }

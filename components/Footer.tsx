@@ -1,10 +1,15 @@
+"use client";
+
 import React from "react";
 import Link from "next/link";
 import { Twitter, Instagram, Disc as DiscordIcon, Youtube } from "lucide-react";
 
 export default function Footer() {
   return (
-    <footer className="w-full bg-footer-bg border-t border-outline mt-auto pt-14 pb-20 md:pb-12 text-soft-gray">
+    <footer
+      suppressHydrationWarning
+      className="w-full bg-footer-bg border-t border-outline mt-auto pt-14 pb-20 md:pb-12 text-soft-gray"
+    >
       <div className="max-w-[1440px] mx-auto px-4 md:px-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 pb-12 border-b border-outline/50">
           {/* Column 1: Brand & Tagline */}
@@ -100,12 +105,13 @@ export default function Footer() {
             <p className="text-xs text-soft-gray leading-relaxed">
               Join our growing community to discuss episodes, theories, and seasonal picks.
             </p>
-            <div className="flex items-center gap-3">
+            <div suppressHydrationWarning className="flex items-center gap-3">
               <a
                 href="https://twitter.com"
                 target="_blank"
                 rel="noreferrer"
                 aria-label="X (Twitter)"
+                suppressHydrationWarning
                 className="w-10 h-10 rounded-full glass-panel flex items-center justify-center text-soft-gray hover:text-white hover:border-electric-purple transition-all"
               >
                 <Twitter className="w-4 h-4" />
@@ -115,6 +121,7 @@ export default function Footer() {
                 target="_blank"
                 rel="noreferrer"
                 aria-label="Instagram"
+                suppressHydrationWarning
                 className="w-10 h-10 rounded-full glass-panel flex items-center justify-center text-soft-gray hover:text-neon-pink hover:border-neon-pink transition-all"
               >
                 <Instagram className="w-4 h-4" />
@@ -124,6 +131,7 @@ export default function Footer() {
                 target="_blank"
                 rel="noreferrer"
                 aria-label="Discord"
+                suppressHydrationWarning
                 className="w-10 h-10 rounded-full glass-panel flex items-center justify-center text-soft-gray hover:text-electric-purple hover:border-electric-purple transition-all"
               >
                 <DiscordIcon className="w-4 h-4" />
@@ -133,6 +141,7 @@ export default function Footer() {
                 target="_blank"
                 rel="noreferrer"
                 aria-label="YouTube"
+                suppressHydrationWarning
                 className="w-10 h-10 rounded-full glass-panel flex items-center justify-center text-soft-gray hover:text-brand-red hover:border-brand-red transition-all"
               >
                 <Youtube className="w-4 h-4" />

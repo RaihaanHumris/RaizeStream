@@ -41,7 +41,7 @@ export default function Navbar() {
             const isActive =
               link.href === "/"
                 ? pathname === "/"
-                : pathname.startsWith(link.href.split("?")[0]) && link.href !== "/";
+                : Boolean(pathname?.startsWith(link.href.split("?")[0])) && link.href !== "/";
 
             return (
               <Link

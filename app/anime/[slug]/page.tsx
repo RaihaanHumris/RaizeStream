@@ -20,6 +20,7 @@ import {
 import { Anime } from "@/types/anime";
 import { getAnimeBySlug, getRecommendations } from "@/lib/api";
 import EpisodeItem from "@/components/EpisodeItem";
+import ArcEpisodeSelector from "@/components/ArcEpisodeSelector";
 import Carousel from "@/components/Carousel";
 
 export default function AnimeDetailPage() {
@@ -271,29 +272,15 @@ export default function AnimeDetailPage() {
             <div className="flex items-center gap-3">
               <div className="w-1.5 h-6 bg-gradient-brand rounded-full" />
               <h2 className="font-outfit font-bold text-xl sm:text-2xl text-white">
-                Episodes ({anime.episodes?.length || anime.episodesCount})
+                Daftar Episode & Arc ({anime.episodesCount || anime.episodes?.length} Episode)
               </h2>
             </div>
             <span className="text-xs text-soft-gray font-medium">
-              Audio: Sub / Dub
+              Subtitle Indonesia • Dual Audio (Sub/Dub)
             </span>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5">
-            {anime.episodes && anime.episodes.length > 0 ? (
-              anime.episodes.map((ep) => (
-                <EpisodeItem
-                  key={ep.id}
-                  animeSlug={anime.slug}
-                  episode={ep}
-                />
-              ))
-            ) : (
-              <div className="col-span-full py-8 text-center text-soft-gray text-sm">
-                Episode list is currently updating. Click "Watch Now" to begin playback.
-              </div>
-            )}
-          </div>
+          <ArcEpisodeSelector anime={anime} />
         </section>
 
         {/* 4. Recommendations Carousel */}

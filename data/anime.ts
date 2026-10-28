@@ -432,32 +432,102 @@ export const animeList: Anime[] = [
   {
     id: "13",
     slug: "one-piece",
-    title: "One Piece: Egghead Arc",
-    japaneseTitle: "ワンピース エッグヘッド編",
+    title: "One Piece",
+    japaneseTitle: "ワンピース",
     poster: "https://cdn.myanimelist.net/images/anime/1244/138851l.jpg",
     banner: "https://images.alphacoders.com/134/1344421.jpeg",
-    rating: 9.1,
+    rating: 9.2,
     genres: ["Action", "Adventure", "Fantasy"],
-    episodesCount: 1120,
-    synopsis: "Luffy and the Straw Hats arrive at Future Island Egghead, where genius scientist Dr. Vegapunk reveals centuries-old forbidden truths about the world.",
+    episodesCount: 1122,
+    synopsis: "Monkey D. Luffy sets sail with his pirate crew to find the legendary treasure One Piece and become the King of the Pirates. Spanning over 1,100 episodes divided into epic story sagas from East Blue to Egghead Island.",
     status: "Airing",
     season: "Winter",
-    year: 2026,
+    year: 1999,
     studio: "Toei Animation",
     type: "TV",
     duration: "24m",
     isTrending: true,
     isNewEpisode: true,
-    episodes: [
+    arcs: [
       {
-        id: "op-ep-1",
-        number: 1115,
-        title: "The Island of the Future",
-        thumbnail: "https://images.alphacoders.com/134/1344421.jpeg",
-        duration: "24:00",
-        isWatched: false,
+        id: "op-arc-1",
+        title: "East Blue Saga",
+        startEpisode: 1,
+        endEpisode: 61,
+        description: "Luffy sets sail from Foosha Village, recruits Zoro, Nami, Usopp, and Sanji, and defeats Arlong."
       },
+      {
+        id: "op-arc-2",
+        title: "Alabasta Saga",
+        startEpisode: 62,
+        endEpisode: 135,
+        description: "Crossing Reverse Mountain, meeting Princess Vivi, and overthrowing Sir Crocodile in Alabasta."
+      },
+      {
+        id: "op-arc-3",
+        title: "Skypiea Saga",
+        startEpisode: 136,
+        endEpisode: 206,
+        description: "Riding the Knock Up Stream to the sky island Skypiea and battling God Enel."
+      },
+      {
+        id: "op-arc-4",
+        title: "Water 7 & Enies Lobby",
+        startEpisode: 207,
+        endEpisode: 325,
+        description: "Rescuing Nico Robin from CP9 at Enies Lobby, declaring war on the World Government."
+      },
+      {
+        id: "op-arc-5",
+        title: "Thriller Bark Saga",
+        startEpisode: 326,
+        endEpisode: 384,
+        description: "Infiltrating Gecko Moria's ghost ship, meeting Brook, and surviving Bartholomew Kuma."
+      },
+      {
+        id: "op-arc-6",
+        title: "Summit War Saga",
+        startEpisode: 385,
+        endEpisode: 516,
+        description: "Sabaody, Impel Down, and the war at Marineford to save Portgas D. Ace."
+      },
+      {
+        id: "op-arc-7",
+        title: "Fishman Island Saga",
+        startEpisode: 517,
+        endEpisode: 574,
+        description: "Reuniting after 2 years of training and traveling 10,000 meters under the sea."
+      },
+      {
+        id: "op-arc-8",
+        title: "Dressrosa Saga",
+        startEpisode: 575,
+        endEpisode: 746,
+        description: "Punk Hazard alliance with Law and defeating Doflamingo to free Dressrosa."
+      },
+      {
+        id: "op-arc-9",
+        title: "Whole Cake Island Saga",
+        startEpisode: 747,
+        endEpisode: 889,
+        description: "Infiltrating Big Mom's territory to retrieve Sanji and Luffy vs. Katakuri."
+      },
+      {
+        id: "op-arc-10",
+        title: "Wano Country Saga",
+        startEpisode: 890,
+        endEpisode: 1085,
+        description: "The Onigashima raid against Emperors Kaido & Big Mom; Luffy unlocks Gear 5."
+      },
+      {
+        id: "op-arc-11",
+        title: "Egghead Arc",
+        startEpisode: 1086,
+        endEpisode: 1122,
+        description: "Future Island Egghead, Dr. Vegapunk's world message, and fighting the Five Elders."
+      }
     ],
+    episodes: [],
   },
   {
     id: "14",

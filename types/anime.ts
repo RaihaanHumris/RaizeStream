@@ -1,3 +1,22 @@
+export interface AnimeSeason {
+  id: string;
+  seasonNumber: number;
+  title: string;
+  startEpisode: number;
+  endEpisode: number;
+  year?: number;
+  episodesCount?: number;
+  description?: string;
+}
+
+export interface AnimeArc {
+  id: string;
+  title: string;
+  startEpisode: number;
+  endEpisode: number;
+  description?: string;
+}
+
 export interface Episode {
   id: string;
   number: number;
@@ -8,6 +27,10 @@ export interface Episode {
   progress?: number; // 0 - 100
   videoUrl?: string;
   synopsis?: string;
+  arcId?: string;
+  arcTitle?: string;
+  seasonNumber?: number;
+  seasonTitle?: string;
 }
 
 export interface Anime {
@@ -40,6 +63,8 @@ export interface Anime {
     timestamp: string;
     totalTime: string;
   };
+  seasons?: AnimeSeason[];
+  arcs?: AnimeArc[];
   episodes: Episode[];
   trailerUrl?: string;
 }
