@@ -99,4 +99,4 @@ npm run lint
 
 ## 👤 Pembuat
 
-Dibuat dengan ❤️ oleh **Muhammad Raihaan Humris** ([@RaihaanHumris](https://github.com/RaihaanHumris)).
+Dibuat oleh **Muhammad Raihaan Humris** ([@RaihaanHumris](https://github.com/RaihaanHumris)).

@@ -50,39 +50,39 @@ export default function VideoPlayer({
   const videoRef = useRef<HTMLVideoElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  const defaultServerUrl = `https://www.animeembed.com/embed/ani/${animeId || "151807"}/${episodeNumber}?track=sub&lang=id&autoPlay=0`;
+  const defaultServerUrl = `https://www.animeembed.com/embed/ani/${animeId || "151807"}/${episodeNumber}?track=sub&autoPlay=0`;
   const [activeUrl, setActiveUrl] = useState(defaultServerUrl);
   const [isIframe, setIsIframe] = useState(true);
   const [servers, setServers] = useState<ServerOption[]>([
     {
-      server: "Server ⚡ Fast Sub-Indo (Tanpa Iklan)",
+      server: "Server 1 ⚡ Anime HD (Server Utama)",
       url: defaultServerUrl,
       type: "iframe",
     },
     {
-      server: "Server 🚀 Sub Indo HD (Clean Stream)",
-      url: `https://vidsrc.cc/v2/embed/anime/${animeId || "151807"}/${episodeNumber}`,
+      server: "Server 2 🎬 Otakudesu (Sub Indo)",
+      url: `https://www.animeembed.com/embed/ani/${animeId || "151807"}/${episodeNumber}?track=sub&lang=id&autoPlay=0`,
       type: "iframe",
     },
     {
-      server: "Server 3 (Anime HD Sub)",
-      url: `https://www.animeembed.com/embed/ani/${animeId || "151807"}/${episodeNumber}?track=sub&autoPlay=0`,
+      server: "Server 3 🌸 Kuronime (Sub Indo HD)",
+      url: `https://www.animeembed.com/embed/ani/${animeId || "151807"}/${episodeNumber}?track=sub&autoPlay=0&accent=ff2e93`,
       type: "iframe",
     },
     {
-      server: "Server 4 (MultiStream HD)",
-      url: `https://multiembed.mov/?video_id=${animeId || "151807"}&tmdb=0&s=1&e=${episodeNumber}`,
+      server: "Server 4 🚀 VidLink HD (Multi-Sub)",
+      url: `https://vidlink.pro/anime/${animeId || "52299"}/${episodeNumber}/sub?fallback=true&primaryColor=9b87ff`,
       type: "iframe",
     },
     {
-      server: "Server 5 (2Embed Player)",
-      url: `https://2embed.cc/embed/anime/${animeId || "151807"}/${episodeNumber}`,
+      server: "Server 5 🌐 Fast Stream Indo",
+      url: `https://www.animeembed.com/embed/ani/${animeId || "151807"}/${episodeNumber}?track=sub&lang=id&autoPlay=0`,
       type: "iframe",
     },
     {
-      server: "Server 6 (Native Player MP4)",
-      url: defaultUrl,
-      type: "video",
+      server: "Server 6 🛡️ Otakudesu Mirror (DesuStream)",
+      url: `https://www.animeembed.com/embed/mal/${animeId || "52299"}/${episodeNumber}?track=sub&autoPlay=0`,
+      type: "iframe",
     },
   ]);
   const [selectedServerIndex, setSelectedServerIndex] = useState(0);
@@ -233,7 +233,9 @@ export default function VideoPlayer({
 
         <div className="flex flex-wrap items-center gap-2">
           {servers.map((srv, idx) => {
+            const isUtama = srv.server.toLowerCase().includes("utama");
             const isNoAds =
+              isUtama ||
               srv.server.toLowerCase().includes("iklan") ||
               srv.server.toLowerCase().includes("no ads");
             return (
@@ -243,13 +245,20 @@ export default function VideoPlayer({
                 className={`px-3 py-1.5 rounded-md font-medium text-xs transition-all flex items-center gap-1.5 ${
                   selectedServerIndex === idx
                     ? "bg-gradient-brand text-white shadow-glow-purple font-semibold"
+                    : isUtama
+                    ? "bg-brand-amber/15 border border-brand-amber/60 text-brand-amber hover:bg-brand-amber/25 hover:text-white"
                     : isNoAds
                     ? "bg-electric-purple/20 border border-electric-purple/60 text-electric-purple hover:bg-electric-purple/30 hover:text-white"
                     : "bg-slate-night/80 border border-outline text-soft-gray hover:text-white hover:border-electric-purple"
                 }`}
               >
                 {srv.server}
-                {isNoAds && selectedServerIndex !== idx && (
+                {isUtama && selectedServerIndex !== idx && (
+                  <span className="px-1.5 py-0.5 text-[9px] bg-brand-amber text-black rounded font-bold uppercase tracking-wider">
+                    UTAMA
+                  </span>
+                )}
+                {!isUtama && isNoAds && selectedServerIndex !== idx && (
                   <span className="px-1.5 py-0.5 text-[9px] bg-electric-purple text-white rounded font-bold uppercase tracking-wider">
                     NO ADS
                   </span>
